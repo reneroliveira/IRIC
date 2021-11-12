@@ -9,8 +9,13 @@
 #' @param pruning A logical number to determine whether to prune the tree. If pruning=TRUE, do the pruning process.
 #' @param minIns Minimum number of instances for split.
 #' @param costRatio CostRatio between Majority class and Minority class.
-#' @return (character) An aloha message
-#'
+#' @return (CSC45) An object with the following itens:
+#' \itemize{
+#'    \item pruning - A logical number to indicate whether to prune the tree.
+#'    \item tree - Fitted cost-sensitive C4.5 decision tree.
+#'    \item classLabels - Names of class labels.
+#'    \item costRatio - Ratio of misclassification cost between the majority and minority class.
+#' }
 #' @examples
 #' data(Korean)
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
