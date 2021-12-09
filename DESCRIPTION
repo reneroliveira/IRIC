@@ -9,8 +9,10 @@ Authors@R: c(
     person("Rener", "Oliveira", role = "ctb"))
 Maintainer: Bing Zhu <zhubing@scu.edu.cn>
 Description: Imbalanced classification is a challenging issue in data mining and machine learning. To address this issue, a large number of solutions have been proposed. We introduce an R library called IRIC, which integrates a wide set of solutions for imbalanced classification. IRIC not only provides a new implementation of some state-of-art techniques for binary imbalanced classification, but also improves the efficiency of model building using parallel techniques. The library and its source code are made freely available.
-License: GPL (>= 3)
+License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8
+Depends: R (>= 3.5.0)
 Imports: RANN, caret, foreach, doParallel, rpart, parallel, RWeka
 LazyData: true
 RoxygenNote: 7.1.2
+Roxygen: list(markdown = TRUE)

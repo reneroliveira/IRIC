@@ -14,7 +14,9 @@
 #'    \item classLabels - Names of class labels.
 #'    \item costRatio - Ratio of misclassification cost between the majority and minority class.
 #' }
-#' @export
+#' @usage CSC45(x, y, pruning = TRUE, minIns = 2, costRatio = 11/56)
+#' @importFrom caret createDataPartition
+#' @export createDataPartition
 #' @examples
 #' data(Korean)
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
@@ -24,17 +26,18 @@
 #' y <- trainset[, 11]
 #' model <- CSC45(x, y, pruning = TRUE)
 #' output <- predict (model, x)
-#'
+#' @export
 #' @references
-#' Zhu, B., Gao, Z., Zhao, J., & Vanden Broucke, S. K. (2019). IRIC: An R library for binary imbalanced classification. SoftwareX, 10, 100341. https://doi.org/10.1016/j.softx.2019.100341
+#' M. T. Kai. An instance-weighting method to induce cost-sensitive trees. IEEE Transactions on Knowledge & Data Engineering, 14(3), 2002, pp. 659-665
 #'
 #' Copyright (C) 2018 Bing Zhu
-
 CSC45 <-
     function(x, ...)
         UseMethod("CSC45")
 
 # default method
+#' @export
+#' @exportS3Method CSC45 data.frame
 CSC45.data.frame <-
     function(x, y, pruning = TRUE, MDL = TRUE, minIns = 2, costRatio  = 11/56)
     {
@@ -333,6 +336,27 @@ CSC45.data.frame <-
         object
     }
 
+#' Predict Method for CSC4.5 Object
+#' @description Predicting instances in test set using CSC4.5 object.
+#' @usage predict (object, x, type="prob")
+#' @param object An object of CSC4.5 class.
+#' @param x A data frame of the predictors from testing data.
+#' @param type Types of output, which can be **prob** (probability) and **class** (predicted label). Default is **class**.
+#' @return Two types of output can be selected:
+#' \itemize{
+#' \item prob - Estimated probability of being a minority instance. The probability is averaged by using an equal-weight majority vote by all weak learners.
+#' \item class - Predicted class of the instance. Instances of probability larger than 0.5 are predicted as 1, otherwise 0.}
+#' @export
+#' @examples
+#' data(Korean)
+#' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
+#' trainset <- Korean[sub,]
+#' testset <- Korean[-sub,]
+#' x <- trainset[, -11]
+#' y <- trainset[, 11]
+#' model <- CSC45(x, y, pruning = TRUE)
+#' output <- predict (model, x, type = "prob") # return probability estimation
+#' output <- predict (model, x, type = "class") # return predicted class
 predict.CSC45 <- function(object, x.test, type = "class")
 {
     if (!type %in% c("class", "prob"))
