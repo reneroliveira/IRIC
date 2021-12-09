@@ -1,8 +1,6 @@
-#Copyright (C) 2018 Bing Zhu
-
 #' Cost-sensitive C4.5 decision tree for binary classification
 #'
-#' @description This function implements cost-sensitive C4.5 decision tree using an instance-weighting method
+#' @description This function implements cost-sensitive C4.5 decision tree using an instance-weighting method.
 #'
 #' @param x A data frame of the predictors from training data.
 #' @param y A vector of response variable from training data.
@@ -16,6 +14,7 @@
 #'    \item classLabels - Names of class labels.
 #'    \item costRatio - Ratio of misclassification cost between the majority and minority class.
 #' }
+#' @export
 #' @examples
 #' data(Korean)
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
@@ -26,6 +25,11 @@
 #' model <- CSC45(x, y, pruning = TRUE)
 #' output <- predict (model, x)
 #'
+#' @references
+#' Zhu, B., Gao, Z., Zhao, J., & Vanden Broucke, S. K. (2019). IRIC: An R library for binary imbalanced classification. SoftwareX, 10, 100341. https://doi.org/10.1016/j.softx.2019.100341
+#'
+#' Copyright (C) 2018 Bing Zhu
+
 CSC45 <-
     function(x, ...)
         UseMethod("CSC45")
