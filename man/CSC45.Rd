@@ -4,7 +4,7 @@
 \alias{CSC45}
 \title{Cost-sensitive C4.5 decision tree for binary classification}
 \usage{
-CSC45(x, ...)
+CSC45(x, y, pruning = TRUE, minIns = 2, costRatio = 11/56)
 }
 \arguments{
 \item{x}{A data frame of the predictors from training data.}
@@ -20,10 +20,10 @@ CSC45(x, ...)
 \value{
 (CSC45) An object with the following itens:
 \itemize{
-   \item pruning - A logical number to indicate whether to prune the tree.
-   \item tree - Fitted cost-sensitive C4.5 decision tree.
-   \item classLabels - Names of class labels.
-   \item costRatio - Ratio of misclassification cost between the majority and minority class.
+\item pruning - A logical number to indicate whether to prune the tree.
+\item tree - Fitted cost-sensitive C4.5 decision tree.
+\item classLabels - Names of class labels.
+\item costRatio - Ratio of misclassification cost between the majority and minority class.
 }
 }
 \description{
@@ -38,10 +38,9 @@ x <- trainset[, -11]
 y <- trainset[, 11]
 model <- CSC45(x, y, pruning = TRUE)
 output <- predict (model, x)
-
 }
 \references{
-Zhu, B., Gao, Z., Zhao, J., & Vanden Broucke, S. K. (2019). IRIC: An R library for binary imbalanced classification. SoftwareX, 10, 100341. https://doi.org/10.1016/j.softx.2019.100341
+M. T. Kai. An instance-weighting method to induce cost-sensitive trees. IEEE Transactions on Knowledge & Data Engineering, 14(3), 2002, pp. 659-665
 
 Copyright (C) 2018 Bing Zhu
 }
