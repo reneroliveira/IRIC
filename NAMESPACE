@@ -2,6 +2,10 @@
 
 S3method(CSC45,data.frame)
 S3method(predict,CSC45)
+export(ADASYN)
 export(CSC45)
+export(InsExs)
+export(Numeralize)
 export(createDataPartition)
+importFrom(RANN,nn2)
 importFrom(caret,createDataPartition)
