@@ -1,13 +1,3 @@
-
-#=================================================================
-# Majority Weighted Minority Oversampling Technique (MWMOTE)
-#================================================================
-# Referenece: Barua, S., M. Islam, et al. (2014).
-# "MWMOTE--Majority Weighted Minority Oversampling Technique for
-# Imbalanced Data Set Learning."IEEE Transactions on
-# Knowledge and Data Engineering, 26(2): 405-425.
-# ---------------------------------------------------------------
-
 #' Majority Weighted Minority Oversampling Technique (MWMOTE)
 #' @description This function implements MWMOTE sampling (Majority Weighted Minority Oversampling Technique).
 #' @param x A data frame of the predictors from training data.
@@ -18,6 +8,7 @@
 #' @param CThresh Threshold to determine the number of clusters.
 #' @importFrom RANN nn2
 #' @importFrom caret createDataPartition
+#' @importFrom stats cutree dist hclust
 #' @return
 #' \item{newData}{A data frame of the oversampled data using MWMOTE.}
 #' @examples
