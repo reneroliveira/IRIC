@@ -4,7 +4,8 @@
 #' @description Convert dataset into numeric matrix.
 #' @param data A two-dimensional dataset.
 #' @param form Model formula.
-#' @return (numerMatrix) Numerilized Matrix
+#' @return
+#' \item{numerMatrix}{Numerilized Matrix.}
 #' @export
 Numeralize <-
   function(data, form = NULL)
@@ -79,7 +80,9 @@ Numeralize <-
 #' @param dataknns nearest instance set
 #' @param numExs number of new instances generated for each instance
 #' @param nomAtt indicators of factor variables
-#' @return (newIns) matrix of new instances
+#' @return
+#' \item{newIns}{Matrix of new instances.}
+#' @importFrom stats runif
 #' @export
 InsExs <-
   function(instance, dataknns, numExs, nomAtt)
@@ -101,4 +104,59 @@ InsExs <-
       newIns[indexChange, j] <- insRep[indexChange, j]
     }
     return(newIns)
+  }
+
+
+#' SmoteExs
+#' @description Obtain Smote instances for minority instances.
+#' @param data Dataset of the minority instances.
+#' @param percOver Percentage of oversampling.
+#' @param k number of nearest neighours.
+#' @importFrom RANN nn2
+#' @return
+#' \item{newExs}{Dataframe with new instances.}
+#' @export
+SmoteExs<-
+  function(data, percOver, k)
+  {
+    # transform factors into integer
+    nomAtt  <- c()
+    numRow  <- dim(data)[1]
+    numCol  <- dim(data)[2]
+    dataX   <- data[ ,-numCol]
+    dataTransformed <- matrix(nrow = numRow, ncol = numCol-1)
+    for (col in 1:(numCol-1))
+    {
+      if (is.factor(data[, col]))
+      {
+        dataTransformed[, col] <- as.integer(data[, col])
+        nomAtt <- c(nomAtt , col)
+      } else {
+        dataTransformed[, col] <- data[, col]
+      }
+    }
+    numExs  <-  round(percOver/100) # this is the number of artificial instances generated
+    newExs  <-  matrix(ncol = numCol-1, nrow = numRow*numExs)
+
+    indexDiff <- sapply(dataX, function(x) length(unique(x)) > 1)
+    # source("code/Data level/Numeralize.R")
+    numerMatrix <- Numeralize(dataX[ ,indexDiff])
+    # require("RANN")
+    id_order <- nn2(numerMatrix, numerMatrix, k+1)$nn.idx
+    for(i in 1:numRow)
+    {
+      kNNs   <- id_order[i, 2:(k+1)]
+      newIns <- InsExs(dataTransformed[i, ], dataTransformed[kNNs, ], numExs, nomAtt)
+      newExs[((i-1)*numExs+1):(i*numExs), ] <- newIns
+    }
+
+    # get factors as in the original data.
+    newExs <- data.frame(newExs)
+    for(i in nomAtt)
+    {
+      newExs[, i] <- factor(newExs[, i], levels = 1:nlevels(data[, i]), labels = levels(data[, i]))
+    }
+    newExs[, numCol] <- factor(rep(data[1, numCol], nrow(newExs)), levels=levels(data[, numCol]))
+    colnames(newExs) <- colnames(data)
+    return(newExs)
   }

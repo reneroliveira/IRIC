@@ -6,14 +6,13 @@
 #' @param y A vector of response variable from training data.
 #' @param pruning A logical number to determine whether to prune the tree. If pruning=TRUE, do the pruning process.
 #' @param minIns Minimum number of instances for split.
-#' @param costRatio CostRatio between Majority class and Minority class.
+#' @param costRatio Cost Ratio between Majority class and Minority class.
+#' @param MDL Prune using Minimum Description Length principle.
 #' @return (CSC45) An object with the following itens:
-#' \itemize{
-#'    \item pruning - A logical number to indicate whether to prune the tree.
-#'    \item tree - Fitted cost-sensitive C4.5 decision tree.
-#'    \item classLabels - Names of class labels.
-#'    \item costRatio - Ratio of misclassification cost between the majority and minority class.
-#' }
+#' \item{pruning}{A logical number to indicate whether to prune the tree.}
+#' \item{tree}{Fitted cost-sensitive C4.5 decision tree.}
+#' \item{classLabels}{Names of class labels.}
+#' \item{costRatio}{Ratio of misclassification cost between the majority and minority class.}
 #' @usage CSC45(x, y, pruning = TRUE, minIns = 2, costRatio = 11/56)
 #' @importFrom caret createDataPartition
 #' @export createDataPartition
@@ -37,7 +36,8 @@ CSC45 <-
 
 # default method
 #' @export
-#' @exportS3Method CSC45 data.frame
+#' @rdname CSC45
+
 CSC45.data.frame <-
     function(x, y, pruning = TRUE, MDL = TRUE, minIns = 2, costRatio  = 11/56)
     {
@@ -338,14 +338,13 @@ CSC45.data.frame <-
 
 #' Predict Method for CSC4.5 Object
 #' @description Predicting instances in test set using CSC4.5 object.
-#' @usage predict (object, x, type="prob")
 #' @param object An object of CSC4.5 class.
-#' @param x A data frame of the predictors from testing data.
+#' @param x.test A data frame of the predictors from testing data.
 #' @param type Types of output, which can be **prob** (probability) and **class** (predicted label). Default is **class**.
 #' @return Two types of output can be selected:
-#' \itemize{
-#' \item prob - Estimated probability of being a minority instance. The probability is averaged by using an equal-weight majority vote by all weak learners.
-#' \item class - Predicted class of the instance. Instances of probability larger than 0.5 are predicted as 1, otherwise 0.}
+#' \item{prob}{Estimated probability of being a minority instance. The probability is averaged by using an equal-weight majority vote by all weak learners.}
+#' \item{class}{Predicted class of the instance. Instances of probability larger than 0.5 are predicted as 1, otherwise 0.}
+#' @importFrom caret createDataPartition
 #' @export
 #' @examples
 #' data(Korean)
