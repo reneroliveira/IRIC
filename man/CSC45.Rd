@@ -2,9 +2,12 @@
 % Please edit documentation in R/CSC45.R
 \name{CSC45}
 \alias{CSC45}
+\alias{CSC45.data.frame}
 \title{Cost-sensitive C4.5 decision tree for binary classification}
 \usage{
 CSC45(x, y, pruning = TRUE, minIns = 2, costRatio = 11/56)
+
+\method{CSC45}{data.frame}(x, y, pruning = TRUE, MDL = TRUE, minIns = 2, costRatio = 11/56)
 }
 \arguments{
 \item{x}{A data frame of the predictors from training data.}
@@ -13,18 +16,18 @@ CSC45(x, y, pruning = TRUE, minIns = 2, costRatio = 11/56)
 
 \item{pruning}{A logical number to determine whether to prune the tree. If pruning=TRUE, do the pruning process.}
 
+\item{MDL}{Prune using Minimum Description Length principle.}
+
 \item{minIns}{Minimum number of instances for split.}
 
-\item{costRatio}{CostRatio between Majority class and Minority class.}
+\item{costRatio}{Cost Ratio between Majority class and Minority class.}
 }
 \value{
 (CSC45) An object with the following itens:
-\itemize{
-\item pruning - A logical number to indicate whether to prune the tree.
-\item tree - Fitted cost-sensitive C4.5 decision tree.
-\item classLabels - Names of class labels.
-\item costRatio - Ratio of misclassification cost between the majority and minority class.
-}
+\item{pruning}{A logical number to indicate whether to prune the tree.}
+\item{tree}{Fitted cost-sensitive C4.5 decision tree.}
+\item{classLabels}{Names of class labels.}
+\item{costRatio}{Ratio of misclassification cost between the majority and minority class.}
 }
 \description{
 This function implements cost-sensitive C4.5 decision tree using an instance-weighting method.

@@ -12,7 +12,7 @@ Numeralize(data, form = NULL)
 \item{form}{Model formula.}
 }
 \value{
-(numerMatrix) Numerilized Matrix
+\item{numerMatrix}{Numerilized Matrix.}
 }
 \description{
 Convert dataset into numeric matrix.

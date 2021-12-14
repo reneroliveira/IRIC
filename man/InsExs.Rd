@@ -16,7 +16,7 @@ InsExs(instance, dataknns, numExs, nomAtt)
 \item{nomAtt}{indicators of factor variables}
 }
 \value{
-(newIns) matrix of new instances
+\item{newIns}{Matrix of new instances.}
 }
 \description{
 Generate Synthetic instances from nearest neighborhood

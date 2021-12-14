@@ -4,20 +4,19 @@
 \alias{predict.CSC45}
 \title{Predict Method for CSC4.5 Object}
 \usage{
-predict (object, x, type="prob")
+\method{predict}{CSC45}(object, x.test, type = "class")
 }
 \arguments{
 \item{object}{An object of CSC4.5 class.}
 
-\item{type}{Types of output, which can be \strong{prob} (probability) and \strong{class} (predicted label). Default is \strong{class}.}
+\item{x.test}{A data frame of the predictors from testing data.}
 
-\item{x}{A data frame of the predictors from testing data.}
+\item{type}{Types of output, which can be \strong{prob} (probability) and \strong{class} (predicted label). Default is \strong{class}.}
 }
 \value{
 Two types of output can be selected:
-\itemize{
-\item prob - Estimated probability of being a minority instance. The probability is averaged by using an equal-weight majority vote by all weak learners.
-\item class - Predicted class of the instance. Instances of probability larger than 0.5 are predicted as 1, otherwise 0.}
+\item{prob}{Estimated probability of being a minority instance. The probability is averaged by using an equal-weight majority vote by all weak learners.}
+\item{class}{Predicted class of the instance. Instances of probability larger than 0.5 are predicted as 1, otherwise 0.}
 }
 \description{
 Predicting instances in test set using CSC4.5 object.
