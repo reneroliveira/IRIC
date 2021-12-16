@@ -10,6 +10,7 @@
 #' @param  k Number of nearest neighbours.
 #' @return
 #' \item{newData}{A data frame of the oversampled data using SMOTE.}
+#' @importFrom caret createDataPartition
 #' @examples
 #' data(Korean)
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
@@ -19,6 +20,7 @@
 #' y <- trainset[, 11]
 #' newData<- SMOTE(x, y)
 #' @references Chawla, N., Bowyer, K., Hall, L. and Kegelmeyer, W. SMOTE: Synthetic minority oversampling technique. Journal of Artificial Intelligence Research, 2002, 16(3), pp. 321-357.
+#' @export
 SMOTE <-
     function(x, y, percOver = 1400, k = 5)
     {
