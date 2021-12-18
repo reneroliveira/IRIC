@@ -71,7 +71,7 @@ SPIDER <-
             for (i in 1:numRow)
             {
                 classCount <- table(data[indexOrder[i, (2:4)], tgt])
-                classMode <- names(which.max(classtable))
+                classMode <- names(which.max(classTable))
                 if (data[i, tgt] == classMode)
                     indexSafe[i] <- TRUE
             }
