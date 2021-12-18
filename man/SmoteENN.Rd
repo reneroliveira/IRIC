@@ -25,3 +25,15 @@ SmoteENN(x, y, percOver = 1400, k1 = 5, k2 = 3, allowParallel = TRUE)
 \description{
 This function implements SmoteENN algorithm, which combined SMOTE and data cleaning techniques ENN(Edited Nearest Neighbor).
 }
+\examples{
+data(Korean)
+sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
+trainset <- Korean[sub,]
+testset <- Korean[-sub,]
+x <- trainset[, -11]
+y <- trainset[, 11]
+newData<- SmoteENN(x, y, percOver =1400 , allowParallel= TRUE)
+}
+\references{
+G. E. Batista, R. C. Prati, M. C. Monard. A study of the behavior of several methods for balancing machine learning training data. ACM SIGKDD Explorations Newsletter , 6 (1) pp. 20 - 29.
+}

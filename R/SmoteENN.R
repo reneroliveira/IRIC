@@ -15,6 +15,15 @@
 #' \item{newData}{A data frame after the application of SmoteENN.}
 #' @importFrom RANN nn2
 #' @importFrom parallel makeCluster stopCluster parLapply parSapply parApply
+#' @references G. E. Batista, R. C. Prati, M. C. Monard. A study of the behavior of several methods for balancing machine learning training data. ACM SIGKDD Explorations Newsletter , 6 (1) pp. 20 - 29.
+#' @examples data(Korean)
+#' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
+#' trainset <- Korean[sub,]
+#' testset <- Korean[-sub,]
+#' x <- trainset[, -11]
+#' y <- trainset[, 11]
+#' newData<- SmoteENN(x, y, percOver =1400 , allowParallel= TRUE)
+#' @export
 SmoteENN<-
     function(x, y, percOver = 1400, k1 = 5, k2 = 3, allowParallel= TRUE)
     {
