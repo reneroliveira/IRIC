@@ -11,9 +11,9 @@ SmoteTL(x, y, percOver = 1400, k = 5)
 
 \item{y}{A vector of response variable from training data.}
 
-\item{k}{Number of nearest neighbors used in Smote.}
+\item{percOver}{Number of new instance generated for each minority instance.}
 
-\item{perc_over}{Number of new instance generated for each minority instance.}
+\item{k}{Number of nearest neighbors used in Smote.}
 }
 \value{
 \item{newData}{A data frame after the application of SmoteTL.}

@@ -3,7 +3,7 @@
 #' @description This function implements SmoteTL, which performs over-sampling with SMOTE and clean data with Tomek Links.
 #' @param x A data frame of the predictors from training data.
 #' @param y A vector of response variable from training data.
-#' @param perc_over Number of new instance generated for each minority instance.
+#' @param percOver Number of new instance generated for each minority instance.
 #' @param k Number of nearest neighbors used in Smote.
 #' @return
 #' \item{newData}{A data frame after the application of SmoteTL.}
