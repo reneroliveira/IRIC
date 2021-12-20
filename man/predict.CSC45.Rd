@@ -4,7 +4,7 @@
 \alias{predict.CSC45}
 \title{Predict Method for CSC4.5 Object}
 \usage{
-\method{predict}{CSC45}(object, x.test, type = "class")
+\method{predict}{CSC45}(object, x.test, type = "class", ...)
 }
 \arguments{
 \item{object}{An object of CSC4.5 class.}
@@ -12,6 +12,8 @@
 \item{x.test}{A data frame of the predictors from testing data.}
 
 \item{type}{Types of output, which can be \strong{prob} (probability) and \strong{class} (predicted label). Default is \strong{class}.}
+
+\item{...}{Additional arguments for predict method.}
 }
 \value{
 Two types of output can be selected:

@@ -5,14 +5,16 @@
 \alias{CSC45.data.frame}
 \title{Cost-sensitive C4.5 decision tree for binary classification}
 \usage{
-CSC45(x, y, pruning = TRUE, minIns = 2, costRatio = 11/56)
+CSC45(x, y, ...)
 
-\method{CSC45}{data.frame}(x, y, pruning = TRUE, MDL = TRUE, minIns = 2, costRatio = 11/56)
+\method{CSC45}{data.frame}(x, y, pruning = TRUE, MDL = TRUE, minIns = 2, costRatio = 11/56, ...)
 }
 \arguments{
 \item{x}{A data frame of the predictors from training data.}
 
 \item{y}{A vector of response variable from training data.}
+
+\item{...}{Arguments to be passed to methods (see below)}
 
 \item{pruning}{A logical number to determine whether to prune the tree. If pruning=TRUE, do the pruning process.}
 

@@ -1,21 +1,7 @@
 #' Cost-sensitive C4.5 decision tree for binary classification
 #'
 #' @description This function implements cost-sensitive C4.5 decision tree using an instance-weighting method.
-#'
-#' @param x A data frame of the predictors from training data.
-#' @param y A vector of response variable from training data.
-#' @param pruning A logical number to determine whether to prune the tree. If pruning=TRUE, do the pruning process.
-#' @param minIns Minimum number of instances for split.
-#' @param costRatio Cost Ratio between Majority class and Minority class.
-#' @param MDL Prune using Minimum Description Length principle.
-#' @return (CSC45) An object with the following itens:
-#' \item{pruning}{A logical number to indicate whether to prune the tree.}
-#' \item{tree}{Fitted cost-sensitive C4.5 decision tree.}
-#' \item{classLabels}{Names of class labels.}
-#' \item{costRatio}{Ratio of misclassification cost between the majority and minority class.}
-#' @usage CSC45(x, y, pruning = TRUE, minIns = 2, costRatio = 11/56)
 #' @importFrom caret createDataPartition
-#' @export createDataPartition
 #' @examples
 #' data(Korean)
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
@@ -31,15 +17,26 @@
 #'
 #' Copyright (C) 2018 Bing Zhu
 CSC45 <-
-    function(x, ...)
+    function(x, y, ...)
         UseMethod("CSC45")
 
 # default method
+#' @param x A data frame of the predictors from training data.
+#' @param y A vector of response variable from training data.
+#' @param pruning A logical number to determine whether to prune the tree. If pruning=TRUE, do the pruning process.
+#' @param minIns Minimum number of instances for split.
+#' @param costRatio Cost Ratio between Majority class and Minority class.
+#' @param MDL Prune using Minimum Description Length principle.
+#' @param ... Arguments to be passed to methods (see below)
+#' @return (CSC45) An object with the following itens:
+#' \item{pruning}{A logical number to indicate whether to prune the tree.}
+#' \item{tree}{Fitted cost-sensitive C4.5 decision tree.}
+#' \item{classLabels}{Names of class labels.}
+#' \item{costRatio}{Ratio of misclassification cost between the majority and minority class.}
 #' @export
 #' @rdname CSC45
-
 CSC45.data.frame <-
-    function(x, y, pruning = TRUE, MDL = TRUE, minIns = 2, costRatio  = 11/56)
+    function(x, y, pruning = TRUE, MDL = TRUE, minIns = 2, costRatio  = 11/56, ...)
     {
         # input check
         Call <- match.call()
@@ -341,6 +338,7 @@ CSC45.data.frame <-
 #' @param object An object of CSC4.5 class.
 #' @param x.test A data frame of the predictors from testing data.
 #' @param type Types of output, which can be **prob** (probability) and **class** (predicted label). Default is **class**.
+#' @param ... Additional arguments for predict method.
 #' @return Two types of output can be selected:
 #' \item{prob}{Estimated probability of being a minority instance. The probability is averaged by using an equal-weight majority vote by all weak learners.}
 #' \item{class}{Predicted class of the instance. Instances of probability larger than 0.5 are predicted as 1, otherwise 0.}
@@ -356,7 +354,7 @@ CSC45.data.frame <-
 #' model <- CSC45(x, y, pruning = TRUE)
 #' output <- predict (model, x, type = "prob") # return probability estimation
 #' output <- predict (model, x, type = "class") # return predicted class
-predict.CSC45 <- function(object, x.test, type = "class")
+predict.CSC45 <- function(object, x.test, type = "class",...)
 {
     if (!type %in% c("class", "prob"))
         stop("type must be class or prob")
