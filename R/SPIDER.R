@@ -9,6 +9,7 @@
 #' @return
 #' \item{newData}{A data frame after the application of SPIDER.}
 #' @references Stefanowski, J. and S. Wilk (2008). "Selective pre-processing of imbalanZced data for improving classification performance." Data Warehousing and Knowledge Discovery, Springer: 283-292.
+#' @importFrom caret createDataPartition
 #' @importFrom RANN nn2
 #' @importFrom parallel makeCluster stopCluster parLapply parSapply parApply
 #' @examples
