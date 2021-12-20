@@ -26,6 +26,8 @@ MWMOTE(x, y, percOver = 1400, k1 = 5, k2 = 5, CThresh = 3)
 This function implements MWMOTE sampling (Majority Weighted Minority Oversampling Technique).
 }
 \examples{
+library(caret)
+
 data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]

@@ -5,8 +5,9 @@
 #' @param percOver Oversampling percentage.
 #' @param percUnder Undersampling percentage.
 #' @return (newData) A data frame of the random oversampled/undersampled data.
-#' @importFrom caret createDataPartition
 #' @examples
+#' library(caret)
+#'
 #' data(Korean)
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 #' trainset <- Korean[sub,]

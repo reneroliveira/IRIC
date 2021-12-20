@@ -22,6 +22,8 @@ SMOTE(x, y, percOver = 1400, k = 5)
 This function implements SMOTE sampling (Synthetic Minority Oversampling Technique).
 }
 \examples{
+library(caret)
+
 data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]

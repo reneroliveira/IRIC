@@ -17,6 +17,8 @@
 #' @importFrom parallel makeCluster stopCluster parLapply parSapply parApply
 #' @references G. E. Batista, R. C. Prati, M. C. Monard. A study of the behavior of several methods for balancing machine learning training data. ACM SIGKDD Explorations Newsletter , 6 (1) pp. 20 - 29.
 #' @examples data(Korean)
+#' library(caret)
+#'
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 #' trainset <- Korean[sub,]
 #' testset <- Korean[-sub,]

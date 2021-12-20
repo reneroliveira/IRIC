@@ -1,8 +1,9 @@
 #' Cost-sensitive C4.5 decision tree for binary classification
 #'
 #' @description This function implements cost-sensitive C4.5 decision tree using an instance-weighting method.
-#' @importFrom caret createDataPartition
 #' @examples
+#' library(caret)
+#'
 #' data(Korean)
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 #' trainset <- Korean[sub,]
@@ -345,6 +346,8 @@ CSC45.data.frame <-
 #' @importFrom caret createDataPartition
 #' @export
 #' @examples
+#' library(caret)
+#'
 #' data(Korean)
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 #' trainset <- Korean[sub,]

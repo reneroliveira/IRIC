@@ -22,6 +22,8 @@ SPIDER(x, y, method = "weak", allowParallel = TRUE)
 This function implements Perform SPIDER (Selective Preprocessing of Imbalanced Data with ENN Rule) on imbalanced dataset, which filters difficult instances from the majority class after local over sampling of the minority class.
 }
 \examples{
+library(caret)
+
 data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]

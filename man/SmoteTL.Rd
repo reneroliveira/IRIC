@@ -22,6 +22,8 @@ SmoteTL(x, y, percOver = 1400, k = 5)
 This function implements SmoteTL, which performs over-sampling with SMOTE and clean data with Tomek Links.
 }
 \examples{
+library(caret)
+
 data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]

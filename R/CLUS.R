@@ -13,9 +13,10 @@
 #' @param k Number of clusters.
 #' @param m Imbalanced ratio in output dataset.
 #' @return \item{newdata}{Data frame of the undersampled data using CLUS method.}
-#' @importFrom caret createDataPartition
 #' @importFrom stats kmeans
 #' @examples
+#' library(caret)
+#'
 #' data(Korean)
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 #' trainset <- Korean[sub,]

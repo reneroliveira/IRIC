@@ -24,6 +24,8 @@ Two types of output can be selected:
 Predicting instances in test set using CSC4.5 object.
 }
 \examples{
+library(caret)
+
 data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]

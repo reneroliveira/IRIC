@@ -27,6 +27,8 @@ This function implements SmoteENN algorithm, which combined SMOTE and data clean
 }
 \examples{
 data(Korean)
+library(caret)
+
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]
 testset <- Korean[-sub,]

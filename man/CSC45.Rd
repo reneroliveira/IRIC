@@ -35,6 +35,8 @@ CSC45(x, y, ...)
 This function implements cost-sensitive C4.5 decision tree using an instance-weighting method.
 }
 \examples{
+library(caret)
+
 data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]

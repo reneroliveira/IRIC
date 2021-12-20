@@ -22,6 +22,8 @@ RandomSampling(x, y, percOver = 0, percUnder = 6.8)
 This function implements random undersampling and oversampling algorithm.
 }
 \examples{
+library(caret)
+
 data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]

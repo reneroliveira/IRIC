@@ -22,6 +22,8 @@ ADASYN(x, y, beta = 0.65, k = 5)
 This function implements ADASYN sampling.
 }
 \examples{
+library(caret)
+
 data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]

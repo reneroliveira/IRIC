@@ -22,6 +22,8 @@ CLUS(x, y, k = 3, m = 1.5)
 This function implements CLUS sampling (clustering-based undersampling), which selects the representative data for training data to improve the classification accuracy for minority class.
 }
 \examples{
+library(caret)
+
 data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]

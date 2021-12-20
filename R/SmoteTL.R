@@ -9,6 +9,8 @@
 #' \item{newData}{A data frame after the application of SmoteTL.}
 #' @references G. E. Batista, R. C. Prati, M. C. Monard. A study of the behavior of several methods for balancing machine learning training data. ACM SIGKDD Explorations Newsletter , 6 (1) pp. 20 - 29.
 #' @examples
+#' library(caret)
+#'
 #' data(Korean)
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 #' trainset <- Korean[sub,]

@@ -10,8 +10,9 @@
 #' @param  k Number of nearest neighbours.
 #' @return
 #' \item{newData}{A data frame of the oversampled data using SMOTE.}
-#' @importFrom caret createDataPartition
 #' @examples
+#' library(caret)
+#'
 #' data(Korean)
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 #' trainset <- Korean[sub,]

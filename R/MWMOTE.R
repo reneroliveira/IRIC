@@ -7,11 +7,12 @@
 #' @param k2 Number of neighbours for selecting majority instances.
 #' @param CThresh Threshold to determine the number of clusters.
 #' @importFrom RANN nn2
-#' @importFrom caret createDataPartition
 #' @importFrom stats cutree dist hclust
 #' @return
 #' \item{newData}{A data frame of the oversampled data using MWMOTE.}
 #' @examples
+#' library(caret)
+#'
 #' data(Korean)
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 #' trainset <- Korean[sub,]
