@@ -4,29 +4,55 @@
 # Bagging, RUSBagging,  SMOTEBagging, Rougly Balanced Bagging
 # Currently it only can be used to binary classification task
 #=======================================================================
-bbaging <-
+
+#' BalanceBagging: Bagging based algorithm to deal with class imbalance
+#'
+#' @description This function implements bagging-based algorithm for imbalance classification. Four algorithms can be found in the current version: SMOTEBagging, RUSBagging, RBBagging and ROSBagging.
+#' @param x A data frame of the predictors from training data.
+#' @param y A vector of response variable from training data.
+#' @param numBag Number of bag.
+#' @param base Base learner
+#' @param type Type of bagging-based algorithm, including "SMOTEBagging","RUSBagging","RBBagging" and "ROSBagging".
+#' @param allowParallel A logical number to control the parallel computing. If allowParallel = TRUE, the function is run using parallel techniques.
+#' @return An object of class bbag, which is a list with the following components:
+#' \item{call}{Function call.}
+#' \item{base}{Types of base learner.}
+#' \item{type}{Type of bagging-based algorithm.}
+#' \item{fits}{Fitted bagging-based model.}
+#' @examples
+#' library(caret)
+#'
+#' data(Korean)
+#' sub <- createDataPartition(Korean$Churn, p=0.75,list=FALSE)
+#' trainset <- Korean[sub,]
+#' testset <- Korean[-sub,]
+#' x <- trainset[, -11]
+#' y <- trainset[, 11]
+#' model <- bbagging(x, y, type = "SMOTEBagging", allowParallel=TRUE)
+#' output <- predict (model, x)
+#' @export
+#' @references S. Hido, H. Kashima, Y. Takahashi. Roughly balanced bagging for imbalanced data. Statistical Analysis & Data Mining, 2009, 2(5-6), pp.412-426.
+#'
+#' S. Wang, X. Yao. 2009. Diversity analysis on imbalanced data sets by using ensemble models. IEEE Symposium on Computational Intelligence, 2009, pp. 324-331.
+bbagging <-
     function(x, ...)
-        UseMethod("bbaging")
+        UseMethod("bbagging")
 
 
-bbaging.data.frame <-
+#' @export
+#' @import foreach
+#' @import doParallel
+#' @rdname bbagging
+bbagging.data.frame <-
     function(x, y, numBag = 40, base = treeBag, type = "SMOTEBagging", allowParallel = FALSE, ...)
     {
-        # Input:
-        #         x: A data frame of the predictors from training data
-        #         y: A vector of response variable from training data
-        #    numBag: Number of bag
-        #      base: Base learner
-        #      type: Type of bagging-based algorithm, including "SMOTEBagging","RUSBagging","RBBagging" and "ROSBagging"
-        # allowParallel: A logical number to control the parallel computing. If allowParallel =TRUE, the function is run using parallel techniques
-        
-        library(foreach)
-        if (allowParallel) library(doParallel)    
-        
+        # library(foreach)
+        # if (allowParallel) library(doParallel)
+
         funcCall <- match.call(expand.dots = FALSE)
         if (!type %in% c( "RUSBagging", "ROSBagging", "SMOTEBagging", "RBBagging"))
             stop("wrong setting with method type")
- 
+
         data <- data.frame(x,y)
         tgt <- length(data)
         x.nam <- names(x)
@@ -34,14 +60,14 @@ bbaging.data.frame <-
         classTable  <- table(data[, tgt])
         classTable  <- sort(classTable, decreasing = TRUE)
         classLabels  <- names(classTable)
-        
+
         CreateResample <- function(data, tgt, classLabels, type, numBag, iter,...)
         {
             indexMaj <- which(data[, tgt] == classLabels[1])
-            indexMin <- which(data[, tgt] == classLabels[2])  
+            indexMin <- which(data[, tgt] == classLabels[2])
             numMin   <- length(indexMin)
             numMaj   <- length(indexMaj)
-            
+
             #do RUSBagging
             if (type  == "RUSBagging"){
                 indexMajSampled <- sample(indexMaj, numMin, replace = FALSE)
@@ -49,7 +75,7 @@ bbaging.data.frame <-
                 indexNew <- c(indexMajSampled, indexMinSampled)
                 newData  <- data[indexNew, ]
             }
-            
+
             #do ROSBagging
             if (type == "ROSBagging"){
                 indexMajSampled <- sample(indexMaj, numMaj, replace = TRUE)
@@ -68,10 +94,10 @@ bbaging.data.frame <-
             }
             #do smotebagging
             if (type == "SMOTEBagging"){
-                source("code/Data level/SmoteExs.R")
+                # source("code/Data level/SmoteExs.R")
                 numCol <- dim(data)[2]
                 n <- (iter-1) %/% (numBag/10) + 1
-                numMinSampled   <- round(numMaj * n/10) 
+                numMinSampled   <- round(numMaj * n/10)
                 indexMinSampled <- sample(indexMin, numMinSampled, replace = TRUE)
                 indexMajSampled <- sample(indexMaj, numMaj, replace = TRUE)
                 indexNew <- c(indexMajSampled, indexMinSampled)
@@ -85,16 +111,16 @@ bbaging.data.frame <-
                         data <- data[, cols]
                     }
                     newExs <- SmoteExs(data[indexMin, ], perOver, k = 5)
-                    if (tgt < numCol) 
+                    if (tgt < numCol)
                     {
                         newExs <- newExs[, cols]
                         data   <- data[, cols]
                     }
                     newData <- rbind(dataROS, newExs)
-                    
+
                 } else {
                     newData <- dataROS
-                }  
+                }
             }
             return(newData)
         }
@@ -103,7 +129,7 @@ bbaging.data.frame <-
             dataSampled <- CreateResample(data, tgt, classLabels, type, numBag, iter,...)
             model <- base$fit(form, dataSampled)
         }
-        
+
         if (allowParallel) {
             `%op%` <- `%dopar%`
             cl <- makeCluster(detectCores()/2)
@@ -111,13 +137,13 @@ bbaging.data.frame <-
         } else {
             `%op%` <- `%do%`
         }
-        
+
         btFits <- foreach(iter = seq(1:numBag),
                           .verbose = FALSE,
                           .errorhandling = "stop") %op% fitter(form, data, tgt, classLabels, type, base, numBag, iter, ...)
-        
+
         if (allowParallel) stopCluster(cl)
-        
+
         structure(
             list(call         = funcCall,
                  base         = base    ,
@@ -129,17 +155,17 @@ bbaging.data.frame <-
     }
 
 
-predict.bbag<-    
+predict.bbag<-
     function(obj, x, type = "class")
     {
-        #  input 
+        #  input
         #     obj: Output from bboost.formula
-        #       x: A data frame of the predictors from testing data       
-        
+        #       x: A data frame of the predictors from testing data
+
         if(is.null(x)) stop("please provide predictors for prediction")
         data <- x
         btPred <- sapply(obj$fits, obj$base$pred, data = data)
-        obj$base$aggregate(btPred, obj$classLabels, type) 
+        obj$base$aggregate(btPred, obj$classLabels, type)
     }
 
 
@@ -153,12 +179,12 @@ treeBag <- list(
         out<-rpart(form,data)
         return(out)
     },
-    
+
     pred = function(object, data)
     {
         out <- predict(object, data, type = "class")
     },
-    
+
     aggregate = function(x, classLabels, type)
     {
         if (!type %in% c("class", "probability"))
@@ -169,9 +195,9 @@ treeBag <- list(
         classfinal <- matrix(0, ncol = numClass, nrow = numIns)
         colnames(classfinal) <- classLabels
         for (i in 1:numClass){
-            classfinal[,i] <- matrix(as.numeric(x == classLabels[i]), nrow = numIns)%*%rep(1, numBag)  
+            classfinal[,i] <- matrix(as.numeric(x == classLabels[i]), nrow = numIns)%*%rep(1, numBag)
         }
-        
+
         if(type == "class"){
             out <- factor(classLabels[apply(classfinal, 1, which.max)], levels = classLabels )
         } else {
