@@ -7,13 +7,14 @@
 
 #' BalanceBagging: Bagging based algorithm to deal with class imbalance
 #'
-#' @description This function implements bagging-based algorithm for imbalance classification. Four algorithms can be found in the current version: SMOTEBagging, RUSBagging, RBBagging and ROSBagging.
+#' @description This function implements bagging-based algorithm for imbalance classification. Four algorithms can be found in the current version: SMOTEBagging, RUSBagging, RBBagging and ROSBagging. Currently it only can be used to binary classification task
 #' @param x A data frame of the predictors from training data.
 #' @param y A vector of response variable from training data.
 #' @param numBag Number of bag.
 #' @param base Base learner
 #' @param type Type of bagging-based algorithm, including "SMOTEBagging","RUSBagging","RBBagging" and "ROSBagging".
 #' @param allowParallel A logical number to control the parallel computing. If allowParallel = TRUE, the function is run using parallel techniques.
+#' @param ... Arguments to be passed to methods (see below)
 #' @return An object of class bbag, which is a list with the following components:
 #' \item{call}{Function call.}
 #' \item{base}{Types of base learner.}
@@ -30,6 +31,10 @@
 #' y <- trainset[, 11]
 #' model <- bbagging(x, y, type = "SMOTEBagging", allowParallel=TRUE)
 #' output <- predict (model, x)
+#' @import rpart
+#' @import parallel
+#' @importFrom stats as.formula rnbinom
+#' @importFrom iterators iter
 #' @export
 #' @references S. Hido, H. Kashima, Y. Takahashi. Roughly balanced bagging for imbalanced data. Statistical Analysis & Data Mining, 2009, 2(5-6), pp.412-426.
 #'
@@ -154,27 +159,49 @@ bbagging.data.frame <-
             class = "bbag")
     }
 
-
+#' Predict Method for bbagging object
+#' @description Predicting instances in test set using bbagging object.
+#' @param object An object of bbaging class.
+#' @param x A data frame of the predictors from testing data.
+#' @param type Types of output, which can be probability and class (predicted label). Default is probability.
+#' @param ... Additional arguments for predict method.
+#' @return Two types of output can be selected:
+#' \item{probability}{Estimated probability of being a minority instance. The probability is averaged by using an equal-weight majority vote by all weak learners.}
+#' \item{class}{Predicted class of the instance. Instances of probability larger than 0.5 are predicted as 1, otherwise 0.}
+#' @examples
+#' library(caret)
+#'
+#' data(Korean)
+#' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
+#' trainset <- Korean[sub,]
+#' testset <- Korean[-sub,]
+#' x<- trainset[, -11]
+#' y<- trainset[, 11]
+#' model <- bbagging(x, y, type = "SMOTEBagging", allowParallel=TRUE)
+#' output <- predict(model, x, type = "probability") # return probability estimation
+#' output <- predict(model, x, type = "class") # return predicted class
+#' @import rpart
+#' @export
 predict.bbag<-
-    function(obj, x, type = "class")
+    function(object, x, type = "class",...)
     {
-        #  input
-        #     obj: Output from bboost.formula
-        #       x: A data frame of the predictors from testing data
 
         if(is.null(x)) stop("please provide predictors for prediction")
         data <- x
-        btPred <- sapply(obj$fits, obj$base$pred, data = data)
-        obj$base$aggregate(btPred, obj$classLabels, type)
+        btPred <- sapply(object$fits, object$base$pred, data = data)
+        object$base$aggregate(btPred, object$classLabels, type)
     }
 
 
+#' Basic tree for Bagging
+#' @description Bagging Base learner
+#' @export
 treeBag <- list(
     fit = function(form, data)
     {
         #options(java.parameters="-Xmx8048m")
         # library("RWeka")
-        library(rpart)
+        # library(rpart)
         # out<- J48(form, data)
         out<-rpart(form,data)
         return(out)

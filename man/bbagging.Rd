@@ -20,6 +20,8 @@ bbagging(x, ...)
 \arguments{
 \item{x}{A data frame of the predictors from training data.}
 
+\item{...}{Arguments to be passed to methods (see below)}
+
 \item{y}{A vector of response variable from training data.}
 
 \item{numBag}{Number of bag.}
@@ -38,7 +40,7 @@ An object of class bbag, which is a list with the following components:
 \item{fits}{Fitted bagging-based model.}
 }
 \description{
-This function implements bagging-based algorithm for imbalance classification. Four algorithms can be found in the current version: SMOTEBagging, RUSBagging, RBBagging and ROSBagging.
+This function implements bagging-based algorithm for imbalance classification. Four algorithms can be found in the current version: SMOTEBagging, RUSBagging, RBBagging and ROSBagging. Currently it only can be used to binary classification task
 }
 \examples{
 library(caret)

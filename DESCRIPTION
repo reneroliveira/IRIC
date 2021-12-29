@@ -12,7 +12,7 @@ Description: Imbalanced classification is a challenging issue in data mining and
 License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 3.5.0)
-Imports: RANN, caret, foreach, doParallel, rpart, parallel, RWeka
+Imports: RANN, caret, foreach, doParallel, rpart, parallel, RWeka, iterators
 LazyData: true
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)

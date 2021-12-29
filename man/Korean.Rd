@@ -3,7 +3,7 @@
 \docType{data}
 \name{Korean}
 \alias{Korean}
-\title{Korean data documentation}
+\title{Korean dataset}
 \format{
 A data frame with 26224 rows and 11 variables.
 }
@@ -11,12 +11,12 @@ A data frame with 26224 rows and 11 variables.
 data(Korean)
 }
 \description{
-Korean data documentation
+This dataset has 10 predictors with customers information and a binary column indicating whether client has churn or not.
 }
 \references{
-reference
+Zhu, B., Gao, Z., Zhao, J., & Vanden Broucke, S. K. (2019). IRIC: An R library for binary imbalanced classification. SoftwareX, 10, 100341. https://doi.org/10.1016/j.softx.2019.100341
 }
 \author{
-Name \email{email@provider}
+Unknown
 }
 \keyword{data}
