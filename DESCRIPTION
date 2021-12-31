@@ -2,11 +2,7 @@ Package: IRIC
 Type: Package
 Title: Integrated R Library for Imbalanced Classification
 Version: 1.2.0
-Authors@R: c(
-    person("Bing", "Zhu", email = "zhubing@scu.edu.cn", role = c("aut","cre")),
-    person("Zihan", "Gao", role = "aut"),
-    person("Junkai","Zhao", role = "aut"),
-    person("Rener", "Oliveira", role = "aut"))
+Author: Bing Zhu, Zihan Gao, Junkai Zhao, Rener Oliveira
 Maintainer: Bing Zhu <zhubing@scu.edu.cn>
 Description: Imbalanced classification is a challenging issue in data mining and machine learning. To address this issue, a large number of solutions have been proposed. We introduce an R library called IRIC, which integrates a wide set of solutions for imbalanced classification. IRIC not only provides a new implementation of some state-of-art techniques for binary imbalanced classification, but also improves the efficiency of model building using parallel techniques. The library and its source code are made freely available.
 License: GPL (>= 3) + file LICENSE
