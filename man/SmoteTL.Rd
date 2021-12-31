@@ -4,12 +4,12 @@
 \alias{SmoteTL}
 \title{SmoteTL - Smote sampling + TomekLinks}
 \usage{
-SmoteTL(x, y, percOver = 1400, k = 5)
+SmoteTL(form, data, percOver = 1400, k = 5)
 }
 \arguments{
-\item{x}{A data frame of the predictors from training data.}
+\item{form}{A model formula.}
 
-\item{y}{A vector of response variable from training data.}
+\item{data}{A data frame of training data.}
 
 \item{percOver}{Number of new instance generated for each minority instance.}
 
@@ -28,9 +28,7 @@ data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]
 testset <- Korean[-sub,]
-x <- trainset[, -11]
-y <- trainset[, 11]
-newData<- SmoteTL(x, y, percOver = 1400)
+newData<- SmoteTL(Churn ~., trainset, percOver = 1400)
 }
 \references{
 G. E. Batista, R. C. Prati, M. C. Monard. A study of the behavior of several methods for balancing machine learning training data. ACM SIGKDD Explorations Newsletter , 6 (1) pp. 20 - 29.

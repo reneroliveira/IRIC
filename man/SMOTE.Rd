@@ -4,14 +4,14 @@
 \alias{SMOTE}
 \title{Synthetic Minority Oversampling Technique (SMOTE)}
 \usage{
-SMOTE(x, y, percOver = 1400, k = 5)
+SMOTE(form, data, percOver = 1400, k = 5)
 }
 \arguments{
-\item{x}{A data frame of the predictors from training data.}
+\item{form}{A model formula.}
 
-\item{y}{A vector of response variable from training data.}
+\item{data}{A data frame of training data.}
 
-\item{percOver}{Percent of new instance generated for each minority instance.}
+\item{percOver}{Percent of new instance generated for each minority instance. percOver/100 is the number of new instances per minority point.}
 
 \item{k}{Number of nearest neighbours.}
 }
@@ -28,10 +28,8 @@ data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]
 testset <- Korean[-sub,]
-x <- trainset[, -11]
-y <- trainset[, 11]
-newData<- SMOTE(x, y)
+newData <- SMOTE(Churn ~., trainset)
 }
 \references{
-Chawla, N., Bowyer, K., Hall, L. and Kegelmeyer, W. SMOTE: Synthetic minority oversampling technique. Journal of Artificial Intelligence Research, 2002, 16(3), pp. 321-357.
+Chawla, N., Bowyer, K., Hall, L. and Kegelmeyer, W. \emph{SMOTE: Synthetic minority oversampling technique.} Journal of Artificial Intelligence Research, 2002, 16(3), pp. 321-357.
 }

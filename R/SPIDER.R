@@ -2,13 +2,13 @@
 # ============================================================
 #' SPIDER
 #' @description This function implements Perform SPIDER (Selective Preprocessing of Imbalanced Data with ENN Rule) on imbalanced dataset, which filters difficult instances from the majority class after local over sampling of the minority class.
-#' @param x A data frame of the predictors from training data.
-#' @param y A vector of response variable from training data.
+#' @param form A model formula.
+#' @param data A data frame of training data.
 #' @param method Type of modification of the minority class in the second phase, including "weak", "relabel", "strong".
 #' @param allowParallel A logical number to control the parallel computing. If allowParallel = TRUE, the function is run using parallel techniques.
 #' @return
 #' \item{newData}{A data frame after the application of SPIDER.}
-#' @references Stefanowski, J. and S. Wilk (2008). "Selective pre-processing of imbalanZced data for improving classification performance." Data Warehousing and Knowledge Discovery, Springer: 283-292.
+#' @references Stefanowski, J. and S. Wilk (2008). \emph{"Selective pre-processing of imbalanced data for improving classification performance."} Data Warehousing and Knowledge Discovery, Springer: 283-292.
 #' @importFrom RANN nn2
 #' @importFrom parallel makeCluster stopCluster parLapply parSapply parApply
 #' @examples
@@ -18,24 +18,21 @@
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 #' trainset <- Korean[sub,]
 #' testset <- Korean[-sub,]
-#' x <- trainset[, -11]
-#' y <- trainset[, 11]
-#' newData<- SPIDER(x, y, method = "weak", allowParallel= TRUE)
+#' newData<- SPIDER(Churn ~., trainset, method = "weak", allowParallel= TRUE)
 #' @export
 SPIDER <-
-    function(x, y, method = "weak", allowParallel = TRUE)
-        # Inputs:
-        #       X   :
-        #       y   :
-        #    method :
+    function(form, data, method = "weak", allowParallel = TRUE)
     {
-        data <- data.frame(x, y)
+        # data <- data.frame(x, y)
         numRow <- dim(data)[1]
         numCol <- dim(data)[2]
 
-        # find class attribute
-        tgt <- length(data)
-        classTable <- table(data[, tgt])
+        # # find class attribute
+        # tgt <- length(data)
+        # classTable <- table(data[, tgt])
+        # find the class variable
+        tgt <- which(names(data) == as.character(form[[2]]))
+        classTable<- table(data[, tgt])
 
         # find the minority instances
         minCl    <- names(which.min(classTable))

@@ -4,14 +4,14 @@
 \alias{MWMOTE}
 \title{Majority Weighted Minority Oversampling Technique (MWMOTE)}
 \usage{
-MWMOTE(x, y, percOver = 1400, k1 = 5, k2 = 5, CThresh = 3)
+MWMOTE(form, data, percOver = 1400, k1 = 5, k2 = 5, CThresh = 3)
 }
 \arguments{
-\item{x}{A data frame of the predictors from training data.}
+\item{form}{A model formula.}
 
-\item{y}{A vector of response variable from training data.}
+\item{data}{A data frame of training data.}
 
-\item{percOver}{Percent of new instance generated for each minority instance.}
+\item{percOver}{Percent of new instance generated for each minority instance. percOver/100 is the number of new instances per minority point.}
 
 \item{k1}{Number of neighbours for filtering.}
 
@@ -32,12 +32,8 @@ data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]
 testset <- Korean[-sub,]
-x <- trainset[, -11]
-y <- trainset[, 11]
-newData<- MWMOTE(x, y)
+newData<- MWMOTE(Churn ~., trainset)
 }
 \references{
-Barua, S., M. Islam, et al. (2014).
-"MWMOTE--Majority Weighted Minority Oversampling Technique for Imbalanced Data Set Learning."
-IEEE Transactions on Knowledge and Data Engineering, 26(2): 405-425.
+Barua, S., M. Islam, et al. (2014).\emph{"MWMOTE--Majority Weighted Minority Oversampling Technique for Imbalanced Data Set Learning."} IEEE Transactions on Knowledge and Data Engineering, 26(2): 405-425.
 }

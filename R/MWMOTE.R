@@ -1,8 +1,8 @@
 #' Majority Weighted Minority Oversampling Technique (MWMOTE)
 #' @description This function implements MWMOTE sampling (Majority Weighted Minority Oversampling Technique).
-#' @param x A data frame of the predictors from training data.
-#' @param y A vector of response variable from training data.
-#' @param percOver Percent of new instance generated for each minority instance.
+#' @param form A model formula.
+#' @param data A data frame of training data.
+#' @param percOver Percent of new instance generated for each minority instance. percOver/100 is the number of new instances per minority point.
 #' @param k1 Number of neighbours for filtering.
 #' @param k2 Number of neighbours for selecting majority instances.
 #' @param CThresh Threshold to determine the number of clusters.
@@ -17,24 +17,24 @@
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 #' trainset <- Korean[sub,]
 #' testset <- Korean[-sub,]
-#' x <- trainset[, -11]
-#' y <- trainset[, 11]
-#' newData<- MWMOTE(x, y)
-#' @references Barua, S., M. Islam, et al. (2014).
-#' "MWMOTE--Majority Weighted Minority Oversampling Technique for Imbalanced Data Set Learning."
-#' IEEE Transactions on Knowledge and Data Engineering, 26(2): 405-425.
+#' newData<- MWMOTE(Churn ~., trainset)
+#' @references Barua, S., M. Islam, et al. (2014).\emph{"MWMOTE--Majority Weighted Minority Oversampling Technique for Imbalanced Data Set Learning."} IEEE Transactions on Knowledge and Data Engineering, 26(2): 405-425.
 #' @export
 MWMOTE<-
-    function(x, y, percOver = 1400, k1 = 5, k2 = 5, CThresh = 3)
+    function(form, data, percOver = 1400, k1 = 5, k2 = 5, CThresh = 3)
     {
-        #numRow <- dim(data)[1]
-        data<-data.frame(x,y)
+        # #numRow <- dim(data)[1]
+        # data<-data.frame(x,y)
+        # numCol <- dim(data)[2]
+        #
+        # # find the majority and minority instances
+        # tgt <- length(data)
+        # classTable <- table(data[, tgt])
+
+        # find the class variable
+        tgt <- which(names(data) == as.character(form[[2]]))
+        classTable<- table(data[, tgt])
         numCol <- dim(data)[2]
-
-        # find the majority and minority instances
-        tgt <- length(data)
-        classTable <- table(data[, tgt])
-
 
         # find the minority and majority instances
         minCl   <- names(which.min(classTable))

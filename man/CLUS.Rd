@@ -33,7 +33,5 @@ y <- trainset[, 11]
 newData<- CLUS(x, y, m=2)
 }
 \references{
-Yen, S.-J. and Y.-S. Lee (2009).
-"Cluster-based under-sampling approaches for imbalanced data distributions."
-Expert Systems with Applications 36(3): 5718-5727.
+Yen, S.-J. and Y.-S. Lee (2009). \emph{"Cluster-based under-sampling approaches for imbalanced data distributions."} Expert Systems with Applications 36(3): 5718-5727.
 }

@@ -4,12 +4,12 @@
 \alias{SmoteENN}
 \title{SmoteENN - Implementation of SmoteENN Algorithm}
 \usage{
-SmoteENN(x, y, percOver = 1400, k1 = 5, k2 = 3, allowParallel = TRUE)
+SmoteENN(form, data, percOver = 1400, k1 = 5, k2 = 3, allowParallel = TRUE)
 }
 \arguments{
-\item{x}{A data frame of the predictors from training data.}
+\item{form}{A model formula.}
 
-\item{y}{A vector of response variable from training data.}
+\item{data}{A data frame of training data.}
 
 \item{percOver}{Percent of new instance generated for each minority instance.}
 
@@ -26,16 +26,14 @@ SmoteENN(x, y, percOver = 1400, k1 = 5, k2 = 3, allowParallel = TRUE)
 This function implements SmoteENN algorithm, which combined SMOTE and data cleaning techniques ENN(Edited Nearest Neighbor).
 }
 \examples{
-data(Korean)
 library(caret)
 
+data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]
 testset <- Korean[-sub,]
-x <- trainset[, -11]
-y <- trainset[, 11]
-newData<- SmoteENN(x, y, percOver =1400 , allowParallel= TRUE)
+newData<- SmoteENN(Churn ~., trainset, percOver =1400, allowParallel = TRUE)
 }
 \references{
-G. E. Batista, R. C. Prati, M. C. Monard. A study of the behavior of several methods for balancing machine learning training data. ACM SIGKDD Explorations Newsletter , 6 (1) pp. 20 - 29.
+G. E. Batista, R. C. Prati, M. C. Monard. \emph{A study of the behavior of several methods for balancing machine learning training data.} ACM SIGKDD Explorations Newsletter , 6 (1) pp. 20 - 29.
 }

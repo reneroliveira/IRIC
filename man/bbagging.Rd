@@ -3,7 +3,7 @@
 \name{bbagging}
 \alias{bbagging}
 \alias{bbagging.data.frame}
-\title{BalanceBagging: Bagging based algorithm to deal with class imbalance}
+\title{BalanceBagging: Bagging based algorithms to deal with class imbalance}
 \usage{
 bbagging(x, ...)
 
@@ -20,7 +20,7 @@ bbagging(x, ...)
 \arguments{
 \item{x}{A data frame of the predictors from training data.}
 
-\item{...}{Arguments to be passed to methods (see below)}
+\item{...}{Arguments to be passed to methods (see below).}
 
 \item{y}{A vector of response variable from training data.}
 
@@ -55,7 +55,7 @@ model <- bbagging(x, y, type = "SMOTEBagging", allowParallel=TRUE)
 output <- predict (model, x)
 }
 \references{
-S. Hido, H. Kashima, Y. Takahashi. Roughly balanced bagging for imbalanced data. Statistical Analysis & Data Mining, 2009, 2(5-6), pp.412-426.
+S. Hido, H. Kashima, Y. Takahashi. \emph{Roughly balanced bagging for imbalanced data.} Statistical Analysis & Data Mining, 2009, 2(5-6), pp.412-426.
 
-S. Wang, X. Yao. 2009. Diversity analysis on imbalanced data sets by using ensemble models. IEEE Symposium on Computational Intelligence, 2009, pp. 324-331.
+S. Wang, X. Yao. 2009. \emph{Diversity analysis on imbalanced data sets by using ensemble models.} IEEE Symposium on Computational Intelligence, 2009, pp. 324-331.
 }

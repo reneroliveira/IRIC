@@ -1,7 +1,7 @@
 #' RandomSampling: Implementation of Random Sampling Algorithm
 #' @description This function implements random undersampling and oversampling algorithm.
-#' @param x  A data frame of the predictors from training data.
-#' @param y A vector of response variable from training data.
+#' @param form A model formula.
+#' @param data A data frame of training data.
 #' @param percOver Oversampling percentage.
 #' @param percUnder Undersampling percentage.
 #' @return (newData) A data frame of the random oversampled/undersampled data.
@@ -12,22 +12,24 @@
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 #' trainset <- Korean[sub,]
 #' testset <- Korean[-sub,]
-#' x <- trainset[, -11]
-#' y <- trainset[, 11]
-#' newData<- RandomSampling(x, y)
+#' newData<- RandomSampling(Churn ~., trainset)
 #' @export
 RandomSampling <-
-    function(x, y, percOver = 0, percUnder = 6.8)
+    function(form, data, percOver = 0, percUnder = 6.8)
     {
         if (percUnder > 100)
             stop("percUnder must be less than 100")
 
-        # the column where the target variable is
-        data <- data.frame(x, y)
-        tgt <- length(data)
-        classTable <- table(data[, tgt])
+        # # the column where the target variable is
+        # data <- data.frame(x, y)
+        # tgt <- length(data)
+        # classTable <- table(data[, tgt])
 
-        # find the minirty and majority class
+        # find the class variable
+        tgt <- which(names(data) == as.character(form[[2]]))
+        classTable<- table(data[, tgt])
+
+        # find the minority and majority class
         minCl <- names(which.min(classTable))
         majCl <- names(which.max(classTable))
 

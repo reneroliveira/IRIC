@@ -1,8 +1,8 @@
 #Copyright (C) 2018 Bing Zhu
 #' SmoteTL - Smote sampling + TomekLinks
 #' @description This function implements SmoteTL, which performs over-sampling with SMOTE and clean data with Tomek Links.
-#' @param x A data frame of the predictors from training data.
-#' @param y A vector of response variable from training data.
+#' @param form A model formula.
+#' @param data A data frame of training data.
 #' @param percOver Number of new instance generated for each minority instance.
 #' @param k Number of nearest neighbors used in Smote.
 #' @return
@@ -15,16 +15,15 @@
 #' sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 #' trainset <- Korean[sub,]
 #' testset <- Korean[-sub,]
-#' x <- trainset[, -11]
-#' y <- trainset[, 11]
-#' newData<- SmoteTL(x, y, percOver = 1400)
+#' newData<- SmoteTL(Churn ~., trainset, percOver = 1400)
 #' @export
 SmoteTL <-
-    function(x, y, percOver = 1400, k = 5)
+    function(form, data, percOver = 1400, k = 5)
     {
         # source("code/Data level/SMOTE.R")
-        newData <- SMOTE(x, y, percOver, k)
-        tgt <- length(newData)
+        newData <- SMOTE(form, data, percOver, k)
+        # tgt <- length(newData)
+        tgt <- which(names(data) == as.character(form[[2]]))
         indexTL <- TomekLink(tgt, newData)
         newDataRemoved <- newData[!indexTL, ]
         return(newDataRemoved)

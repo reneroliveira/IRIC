@@ -4,12 +4,12 @@
 \alias{RandomSampling}
 \title{RandomSampling: Implementation of Random Sampling Algorithm}
 \usage{
-RandomSampling(x, y, percOver = 0, percUnder = 6.8)
+RandomSampling(form, data, percOver = 0, percUnder = 6.8)
 }
 \arguments{
-\item{x}{A data frame of the predictors from training data.}
+\item{form}{A model formula.}
 
-\item{y}{A vector of response variable from training data.}
+\item{data}{A data frame of training data.}
 
 \item{percOver}{Oversampling percentage.}
 
@@ -28,7 +28,5 @@ data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]
 testset <- Korean[-sub,]
-x <- trainset[, -11]
-y <- trainset[, 11]
-newData<- RandomSampling(x, y)
+newData<- RandomSampling(Churn ~., trainset)
 }

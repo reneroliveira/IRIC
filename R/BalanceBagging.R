@@ -5,7 +5,7 @@
 # Currently it only can be used to binary classification task
 #=======================================================================
 
-#' BalanceBagging: Bagging based algorithm to deal with class imbalance
+#' BalanceBagging: Bagging based algorithms to deal with class imbalance
 #'
 #' @description This function implements bagging-based algorithm for imbalance classification. Four algorithms can be found in the current version: SMOTEBagging, RUSBagging, RBBagging and ROSBagging. Currently it only can be used to binary classification task
 #' @param x A data frame of the predictors from training data.
@@ -14,7 +14,7 @@
 #' @param base Base learner
 #' @param type Type of bagging-based algorithm, including "SMOTEBagging","RUSBagging","RBBagging" and "ROSBagging".
 #' @param allowParallel A logical number to control the parallel computing. If allowParallel = TRUE, the function is run using parallel techniques.
-#' @param ... Arguments to be passed to methods (see below)
+#' @param ... Arguments to be passed to methods (see below).
 #' @return An object of class bbag, which is a list with the following components:
 #' \item{call}{Function call.}
 #' \item{base}{Types of base learner.}
@@ -36,9 +36,9 @@
 #' @importFrom stats as.formula rnbinom
 #' @importFrom iterators iter
 #' @export
-#' @references S. Hido, H. Kashima, Y. Takahashi. Roughly balanced bagging for imbalanced data. Statistical Analysis & Data Mining, 2009, 2(5-6), pp.412-426.
+#' @references S. Hido, H. Kashima, Y. Takahashi. \emph{Roughly balanced bagging for imbalanced data.} Statistical Analysis & Data Mining, 2009, 2(5-6), pp.412-426.
 #'
-#' S. Wang, X. Yao. 2009. Diversity analysis on imbalanced data sets by using ensemble models. IEEE Symposium on Computational Intelligence, 2009, pp. 324-331.
+#' S. Wang, X. Yao. 2009. \emph{Diversity analysis on imbalanced data sets by using ensemble models.} IEEE Symposium on Computational Intelligence, 2009, pp. 324-331.
 bbagging <-
     function(x, ...)
         UseMethod("bbagging")

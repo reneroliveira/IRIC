@@ -4,12 +4,12 @@
 \alias{SPIDER}
 \title{SPIDER}
 \usage{
-SPIDER(x, y, method = "weak", allowParallel = TRUE)
+SPIDER(form, data, method = "weak", allowParallel = TRUE)
 }
 \arguments{
-\item{x}{A data frame of the predictors from training data.}
+\item{form}{A model formula.}
 
-\item{y}{A vector of response variable from training data.}
+\item{data}{A data frame of training data.}
 
 \item{method}{Type of modification of the minority class in the second phase, including "weak", "relabel", "strong".}
 
@@ -28,10 +28,8 @@ data(Korean)
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]
 testset <- Korean[-sub,]
-x <- trainset[, -11]
-y <- trainset[, 11]
-newData<- SPIDER(x, y, method = "weak", allowParallel= TRUE)
+newData<- SPIDER(Churn ~., trainset, method = "weak", allowParallel= TRUE)
 }
 \references{
-Stefanowski, J. and S. Wilk (2008). "Selective pre-processing of imbalanZced data for improving classification performance." Data Warehousing and Knowledge Discovery, Springer: 283-292.
+Stefanowski, J. and S. Wilk (2008). \emph{"Selective pre-processing of imbalanced data for improving classification performance."} Data Warehousing and Knowledge Discovery, Springer: 283-292.
 }

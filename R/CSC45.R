@@ -14,7 +14,7 @@
 #' output <- predict (model, x)
 #' @export
 #' @references
-#' M. T. Kai. An instance-weighting method to induce cost-sensitive trees. IEEE Transactions on Knowledge & Data Engineering, 14(3), 2002, pp. 659-665
+#' M. T. Kai. \emph{An instance-weighting method to induce cost-sensitive trees.} IEEE Transactions on Knowledge & Data Engineering, 14(3), 2002, pp. 659-665
 #'
 #' Copyright (C) 2018 Bing Zhu
 CSC45 <-
