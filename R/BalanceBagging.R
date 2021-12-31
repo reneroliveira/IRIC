@@ -5,7 +5,7 @@
 # Currently it only can be used to binary classification task
 #=======================================================================
 
-#' BalanceBagging: Bagging based algorithms to deal with class imbalance
+#' BalanceBagging - Bagging based algorithms to deal with class imbalance
 #'
 #' @description This function implements bagging-based algorithm for imbalance classification. Four algorithms can be found in the current version: SMOTEBagging, RUSBagging, RBBagging and ROSBagging. Currently it only can be used to binary classification task
 #' @param x A data frame of the predictors from training data.
@@ -196,6 +196,7 @@ predict.bbag<-
 #' Basic tree for Bagging
 #' @description Bagging Base learner
 #' @export
+#' @keywords internal
 treeBag <- list(
     fit = function(form, data)
     {

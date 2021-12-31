@@ -2,7 +2,7 @@
 % Please edit documentation in R/ADASYN.R
 \name{ADASYN}
 \alias{ADASYN}
-\title{ADASYN: Adaptive Synthetic Sampling}
+\title{Adaptive Synthetic Sampling}
 \usage{
 ADASYN(form, data, beta = 0.65, k = 5)
 }

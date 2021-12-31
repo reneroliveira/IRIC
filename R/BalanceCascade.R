@@ -8,7 +8,7 @@
 # Cybernetics, IEEE Transactions on 39(2): 539-550.
 #========================================================================
 
-#' BalanceCascade
+#' Implementation of BalanceCascade Algorithm
 #' @description This function implements BalanceCascade algorithm for binary class imbalance classification.
 #' @param x A data frame of the predictors from training data.
 #' @param y A vector of response variable from training data.

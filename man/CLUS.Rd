@@ -2,7 +2,7 @@
 % Please edit documentation in R/CLUS.R
 \name{CLUS}
 \alias{CLUS}
-\title{CLUS: Clustering-based Undersampling Method}
+\title{Clustering-based Undersampling Method}
 \usage{
 CLUS(x, y, k = 3, m = 1.5)
 }

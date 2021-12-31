@@ -3,7 +3,7 @@
 \name{bbagging}
 \alias{bbagging}
 \alias{bbagging.data.frame}
-\title{BalanceBagging: Bagging based algorithms to deal with class imbalance}
+\title{BalanceBagging - Bagging based algorithms to deal with class imbalance}
 \usage{
 bbagging(x, ...)
 

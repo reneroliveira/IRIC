@@ -17,3 +17,4 @@ Numeralize(data, form = NULL)
 \description{
 Convert dataset into numeric matrix.
 }
+\keyword{internal}

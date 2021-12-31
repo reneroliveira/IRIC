@@ -1,6 +1,6 @@
 #Copyright (C) 2018 Bing Zhu
 # ============================================================
-#' SPIDER
+#' Selective Preprocessing of Imbalanced Data with ENN Rule
 #' @description This function implements Perform SPIDER (Selective Preprocessing of Imbalanced Data with ENN Rule) on imbalanced dataset, which filters difficult instances from the majority class after local over sampling of the minority class.
 #' @param form A model formula.
 #' @param data A data frame of training data.

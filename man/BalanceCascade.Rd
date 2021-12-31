@@ -3,7 +3,7 @@
 \name{BalanceCascade}
 \alias{BalanceCascade}
 \alias{BalanceCascade.data.frame}
-\title{BalanceCascade}
+\title{Implementation of BalanceCascade Algorithm}
 \usage{
 BalanceCascade(x, ...)
 

@@ -6,7 +6,7 @@
 # Expert Systems with Applications 36(3): 5718-5727.
 #-----------------------------------------------------------------------------
 
-#' CLUS: Clustering-based Undersampling Method
+#' Clustering-based Undersampling Method
 #' @description This function implements CLUS sampling (clustering-based undersampling), which selects the representative data for training data to improve the classification accuracy for minority class.
 #' @param x A data frame of the predictors from training data.
 #' @param y A vector of response variable from training data.

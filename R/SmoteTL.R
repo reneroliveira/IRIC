@@ -1,5 +1,5 @@
 #Copyright (C) 2018 Bing Zhu
-#' SmoteTL - Smote sampling + TomekLinks
+#' Smote sampling + TomekLinks
 #' @description This function implements SmoteTL, which performs over-sampling with SMOTE and clean data with Tomek Links.
 #' @param form A model formula.
 #' @param data A data frame of training data.
@@ -37,6 +37,7 @@ SmoteTL <-
 #' \item{indexTomek}{Logical vector indicating whether a instance is in TomekLinks.}
 #' @importFrom RANN nn2
 #' @export
+#' @keywords internal
 TomekLink <-
     function(tgt, data)
     {

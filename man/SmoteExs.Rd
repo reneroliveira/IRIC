@@ -19,3 +19,4 @@ SmoteExs(data, percOver, k)
 \description{
 Obtain Smote instances for minority instances.
 }
+\keyword{internal}

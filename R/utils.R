@@ -7,6 +7,7 @@
 #' @return
 #' \item{numerMatrix}{Numerilized Matrix.}
 #' @export
+#' @keywords internal
 Numeralize <-
   function(data, form = NULL)
   {
@@ -84,6 +85,7 @@ Numeralize <-
 #' \item{newIns}{Matrix of new instances.}
 #' @importFrom stats runif
 #' @export
+#' @keywords internal
 InsExs <-
   function(instance, dataknns, numExs, nomAtt)
   {
@@ -116,6 +118,7 @@ InsExs <-
 #' @return
 #' \item{newExs}{Dataframe with new instances.}
 #' @export
+#' @keywords internal
 SmoteExs<-
   function(data, percOver, k)
   {

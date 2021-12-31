@@ -2,7 +2,7 @@
 % Please edit documentation in R/RandomSampling.R
 \name{RandomSampling}
 \alias{RandomSampling}
-\title{RandomSampling: Implementation of Random Sampling Algorithm}
+\title{Implementation of Random Sampling Algorithm}
 \usage{
 RandomSampling(form, data, percOver = 0, percUnder = 6.8)
 }

@@ -13,4 +13,4 @@ treeBoost
 \description{
 Boosting Base learner
 }
-\keyword{datasets}
+\keyword{internal}

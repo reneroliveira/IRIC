@@ -13,4 +13,4 @@ treeBag
 \description{
 Bagging Base learner
 }
-\keyword{datasets}
+\keyword{internal}

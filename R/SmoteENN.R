@@ -3,7 +3,7 @@
 # SmoteENN: Smote+ENN
 # ===================================================
 
-#' SmoteENN - Implementation of SmoteENN Algorithm
+#' Implementation of SmoteENN Algorithm
 #' @description This function implements SmoteENN algorithm, which combined SMOTE and data cleaning techniques ENN(Edited Nearest Neighbor).
 #' @param form A model formula.
 #' @param data A data frame of training data.

@@ -1,4 +1,4 @@
-#' RandomSampling: Implementation of Random Sampling Algorithm
+#' Implementation of Random Sampling Algorithm
 #' @description This function implements random undersampling and oversampling algorithm.
 #' @param form A model formula.
 #' @param data A data frame of training data.

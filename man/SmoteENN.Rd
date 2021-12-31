@@ -2,7 +2,7 @@
 % Please edit documentation in R/SmoteENN.R
 \name{SmoteENN}
 \alias{SmoteENN}
-\title{SmoteENN - Implementation of SmoteENN Algorithm}
+\title{Implementation of SmoteENN Algorithm}
 \usage{
 SmoteENN(form, data, percOver = 1400, k1 = 5, k2 = 3, allowParallel = TRUE)
 }

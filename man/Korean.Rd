@@ -20,3 +20,4 @@ Zhu, B., Gao, Z., Zhao, J., & Vanden Broucke, S. K. (2019). IRIC: An R library f
 Unknown
 }
 \keyword{data}
+\keyword{internal}

@@ -8,4 +8,5 @@
 #' @usage data(Korean)
 #' @format A data frame with 26224 rows and 11 variables.
 #' @keywords data
+#' @keywords internal
 NULL

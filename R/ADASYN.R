@@ -1,4 +1,4 @@
-#' ADASYN: Adaptive Synthetic Sampling
+#' Adaptive Synthetic Sampling
 #' @description This function implements ADASYN sampling.
 #' @param form A model formula.
 #' @param data A data frame of training data.

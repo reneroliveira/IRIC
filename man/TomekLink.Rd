@@ -17,3 +17,4 @@ TomekLink(tgt, data)
 \description{
 Function that finds the TomekLink
 }
+\keyword{internal}

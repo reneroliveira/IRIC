@@ -2,7 +2,7 @@
 % Please edit documentation in R/SPIDER.R
 \name{SPIDER}
 \alias{SPIDER}
-\title{SPIDER}
+\title{Selective Preprocessing of Imbalanced Data with ENN Rule}
 \usage{
 SPIDER(form, data, method = "weak", allowParallel = TRUE)
 }

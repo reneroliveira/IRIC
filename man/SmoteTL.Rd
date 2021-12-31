@@ -2,7 +2,7 @@
 % Please edit documentation in R/SmoteTL.R
 \name{SmoteTL}
 \alias{SmoteTL}
-\title{SmoteTL - Smote sampling + TomekLinks}
+\title{Smote sampling + TomekLinks}
 \usage{
 SmoteTL(form, data, percOver = 1400, k = 5)
 }

@@ -21,3 +21,4 @@ InsExs(instance, dataknns, numExs, nomAtt)
 \description{
 Generate Synthetic instances from nearest neighborhood
 }
+\keyword{internal}

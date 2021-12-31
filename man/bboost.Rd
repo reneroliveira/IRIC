@@ -3,7 +3,7 @@
 \name{bboost}
 \alias{bboost}
 \alias{bboost.data.frame}
-\title{BalanceBoost: Implementation of Boost-based Algorithms}
+\title{BalanceBoost - Implementation of Boost-based Algorithms}
 \usage{
 bboost(x, ...)
 

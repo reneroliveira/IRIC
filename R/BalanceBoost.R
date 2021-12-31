@@ -6,7 +6,7 @@
 # Currently it only can be used to binary classification task
 #====================================================================
 
-#' BalanceBoost: Implementation of Boost-based Algorithms
+#' BalanceBoost - Implementation of Boost-based Algorithms
 #' @description This function implements boost-based algorithm for imbalance classification. Four algorithms can be found in the current version: Adaboost, SMOTEboost, RUSBoost, AdaC2.
 #' @param x A data frame of the predictors from training data.
 #' @param y A vector of response variable from training data.
@@ -225,6 +225,7 @@ predict.bboost<-
 #' Basic tree for Boosting
 #' @description Boosting Base learner
 #' @export
+#' @keywords internal
 treeBoost <- list(
     fit = function(form, data)
     {
