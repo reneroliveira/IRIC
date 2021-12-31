@@ -65,7 +65,11 @@ The current version of IRIC (v1.1) provides a set of 19 approaches for imbalance
 
 
 ## Installation
-Download the code from GitHub repository before and then apply the techniques.  R version >= 3.1.
+R version >= 3.5
+```r
+library(devtools)
+devtools::install_github('reneroliveira/IRIC')
+```
 ## Examples
 SMOTE(Data level), CSC4.5 (Algorithm level) and RBBagging (Ensemble-based level) are presented as examples of IRIC's usage.
 - [SMOTE](#SMOTE)
@@ -77,26 +81,20 @@ SMOTE(Data level), CSC4.5 (Algorithm level) and RBBagging (Ensemble-based level)
 #Load the package caret for data partitioning
 library(caret)
 #Load data set
-load("Korean.RDa")
-#Run the script file of SMOTE
-source("SMOTE.R")
+data(Korean)
 #data split
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]
 testset <- Korean[-sub,]
-x <- trainset[, -11]
-y <- trainset[, 11]
 #call the SMOTE
-newData<- SMOTE(x, y)
+newData<- SMOTE(Churn~., trainset)
 ```
 #### CSC4.5
 ```
 #Example of CSC4.5 
-#load CSC4.5
-source("CSC45.R")
 library(caret)
 #Load data set
-load("Korean.RDa")
+data(Korean)
 #Data split
 sub <- createDataPartition(Korean$Churn,p=0.75,list=FALSE)
 trainset <- Korean[sub,]
@@ -114,9 +112,7 @@ output <- predict (model, x)
 #Load the package caret for data partitioning
 library (caret) 
 #Load data set 
-load(”Korean.RDa”) 
-#Run the script file of RBBagging 
-source(”BalanceBagging.R”)
+data(Korean)
 #Data split
 sub <- createDataPartition(Korean$Churn, p=0.75,list=FALSE)
 trainset <- Korean[sub,]
@@ -124,9 +120,9 @@ testset <- Korean[-sub,]
 x <- trainset[, -11]
 y <- trainset[, 11]
 #call the RBBaging for model training train 
-model <- bbagging(x, y, type=”RBBagging", allowParallel=TRUE)
+model <- bbagging(x, y, type="RBBagging", allowParallel=TRUE)
 #prediction
-output <- predict (model, x)
+output <- predict(model, x)
 ```
 
 
